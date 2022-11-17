@@ -25,7 +25,9 @@ public class Converter {
         arabianKeyMap.put(9, "IX");
         arabianKeyMap.put(5, "V");
         arabianKeyMap.put(4, "IV");
-        arabianKeyMap.put(1, "V");
+        arabianKeyMap.put(3, "III");
+        arabianKeyMap.put(2, "II");
+        arabianKeyMap.put(1, "I");
 
 
 
@@ -35,13 +37,17 @@ public class Converter {
     public String intToRoman(int number) {
         String roman = "";
         int arabianKey;
-        do {
-            arabianKey = arabianKeyMap.floorKey(number);
-            roman += arabianKeyMap.get(arabianKey);
-            number -= arabianKey;
-        } while (number != 0);
-        return roman;
+        try {
+            do {
+                arabianKey = arabianKeyMap.floorKey(number);
+                roman += arabianKeyMap.get(arabianKey);
+                number -= arabianKey;
+            } while (number != 0);
+        } catch (NullPointerException e) {
+            System.err.println("Exception //т.к. в римской системе нет отрицательных чисел");
+        }
 
+        return roman;
     }
     public int romanToInt(String s) {
         int end = s.length()-1;
